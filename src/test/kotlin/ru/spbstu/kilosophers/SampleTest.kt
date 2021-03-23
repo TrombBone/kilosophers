@@ -16,7 +16,7 @@ class SampleTest {
         for (index in 0 until kilosopherCount) {
             val leftFork = forks[index]
             val rightFork = forks[(index + 1) % kilosopherCount]
-            val kilosopher = university.produce(leftFork, rightFork, index)
+            val kilosopher = university.produce(leftFork, rightFork, index, kilosopherCount)
             kilosophers.add(kilosopher)
         }
 
@@ -51,5 +51,15 @@ class SampleTest {
     @Test
     fun testSampleKilosopherWithAtomicFork() {
         doTest(SampleUniversity, AtomicForkBox, kilosopherCount = 5, duration = 20000)
+    }
+
+    @Test
+    fun testSampleKilosopherWithConcurrentForkEven() {
+        doTest(SampleUniversity, ConcurrentForkBox, kilosopherCount = 4, duration = 20000)
+    }
+
+    @Test
+    fun testSampleKilosopherWithAtomicForkEven() {
+        doTest(SampleUniversity, AtomicForkBox, kilosopherCount = 4, duration = 20000)
     }
 }
